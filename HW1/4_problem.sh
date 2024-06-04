@@ -44,3 +44,5 @@ while [[ "$option" == "Yes" ]]; do
 	fi
 	read -p "To print the next ten lines, type 'Yes': " option
 done
+
+#need to find a way to update lines of file to be read. otherwise will just keep printing first 10 lines
