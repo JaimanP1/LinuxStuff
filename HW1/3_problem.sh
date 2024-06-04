@@ -16,7 +16,7 @@ cd ..
 
 for var in $@
 do
-	echo $var
+	#echo $var
 	if [ ! -e $var ]; then
 		echo "The file does not exist"
 	else
@@ -31,3 +31,7 @@ do
 		cd ..
 	fi
 done
+
+cd $new_directory
+location=`pwd`
+echo "The process has completed. Backup directory is located at: $location "
