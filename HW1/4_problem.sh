@@ -38,11 +38,15 @@ while [[ $while_condition == "false" ]]; do
 done
 
 option="Yes"
+count=0
 while [[ "$option" == "Yes" ]]; do
 	if [ -e $menu ]; then
-        	echo `head -n10 $menu`
+		echo $count
+        	echo `tail -n + $count`
 	fi
+	count=$((count + 10))
 	read -p "To print the next ten lines, type 'Yes': " option
 done
 
 #need to find a way to update lines of file to be read. otherwise will just keep printing first 10 lines
+#head -n4 example.lst | tail -n+2

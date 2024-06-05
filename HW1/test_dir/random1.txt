@@ -7,3 +7,14 @@ Whether my code works
 Written like a poem
 
 By a bad poet
+
+Here begins 
+
+Another set of 10 lines
+
+To test
+
+The difficult part 
+
+of my bash script
+
