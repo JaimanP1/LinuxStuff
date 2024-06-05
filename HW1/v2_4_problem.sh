@@ -1,5 +1,15 @@
 #!/usr/bin/bash
 
+location=`pwd`
+flag=""
+while [[ $flag != "Quit"  ]];
+do 
+	#code below this loop
+	cd $location
+	echo $location
+	read -p "If you would like to exit this program, type 'Quit', else this program will execute again" flag
+done
+
 read -p "Enter a directory name: " directory_name
 
 if [ ! -d "$directory_name" ]; then
@@ -54,7 +64,7 @@ file_printer () {
 				echo "The file only has $lines lines, no more to print. Exiting program."
 				exit 0
 			else
-				echo `tail -n$count $1`
+				echo `tail -n +$count --lines 10 $1`
 			fi
 		fi
 		count=$((count + 10))
@@ -70,6 +80,23 @@ elif [ -d $menu ]; then
 	echo "Select one of the following files: "
 	echo `ls`
 	
+	while_condition="false"
+	menu=" "
+
+	while [[ $while_condition == "false" ]]; do
+		read -p "Type the name of the file/directory you would like to select, press 'Q' to quit: " menu
+
+		if [[ $menu == "Q" ]]; then
+			echo Exiting program
+			exit 0
+
+		elif [ ! -e "$menu" ]; then
+        		echo "This file/directory does not exist"
+		else
+			while_condition="true"
+		fi
+	done
+	file_printer $menu
 else
 	echo "logical error"
 fi
@@ -78,3 +105,4 @@ fi
 #need to find a way to make the code for the menu into a function so I can call it for subdirectories
 #need to make it return the file/directory picked
 #need to shift the user input statment so it occurs outside the function
+#why is file_printer not giving the right values

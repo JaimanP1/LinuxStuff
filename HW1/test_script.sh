@@ -1,0 +1,3 @@
+location=`pwd`
+
+echo $location
