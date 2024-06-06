@@ -12,11 +12,25 @@ First I treated the case that the number of arguments was zero (no file name was
 
 Next, I checked whether the argument was not a file or directory, the argument was a file, or whether the argument was a directory.
 
-If it was a file, I checked for read and execute permissions through the stat and cut command, which isolated the characters need. I chose to use the  
+If it was a file, I checked for read and execute permissions through the stat and cut command, which isolated the characters need. I chose to use the stat command over the ls -l command as I wanted to avoid having to find the correct file. I then compared the number of characters to the threshold value if there was read permission. 
 
-If it was a directory
+If it was a directory, I used the ls and wc -l commands to list and count the files. Then I used the du -h command to show disk usage in a human readable form. 
 
 Problem 3:
 
+First, as in problem 2, I checked the number of arguments using the same logic as before. 
+
+Then I created a date variable using the variable option of the printf command as well as its formatting options. I then made a new directory using this and a log file. 
+
+Finally, I iterated over the files and used the mv command to rename them while also appending them to the log file. I also printed their location.  
 
 Problem 4:
+
+The first part of the code is the while loop which allows the program to run again, as instructed by part 5 of the problem. 
+
+Next I have the option for the user to select the directory they would like to work in, or make a directory if it does not exist. After doing so, I have a menu which lists all the files and subdirectories and allows the user to either quit or choose a file/directory. If it does not exist, the user can retype the name or quit the program. Next I created a function which prints the first ten lines of the file using the head command. If more lines are desired, it uses the tail command to print the next ten lines. If there are no more lines to print, it exits the program. 
+
+If the user selects a file from the menu option, this is function is called. 
+
+If the user instead chooses a directory, a menu like option is presented to choose a file, after which the function is called again. 
+

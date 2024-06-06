@@ -4,9 +4,9 @@ Just to test
 
 Whether my code works
 
-Written like a poem
+Written in this format
 
-By a bad poet
+To count the number of lines
 
 Here begins 
 
