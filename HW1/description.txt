@@ -33,4 +33,4 @@ Next I have the option for the user to select the directory they would like to w
 If the user selects a file from the menu option, this is function is called. 
 
 If the user instead chooses a directory, a menu like option is presented to choose a file, after which the function is called again. 
-
+The files are then looped over and only print those which have been modified in the last 24 hours. The time since epoch is used to determine the age of the files. 

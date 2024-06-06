@@ -73,7 +73,18 @@ do
 	elif [ -d $menu ]; then
 		cd $menu
 		echo "Select one of the following files: "
-		echo `ls`
+		current_date=$(date +%s)
+
+		for file in *; do
+		    if [ -f "$file" ]; then
+			last_modified_time=$(date -r "$file" +%s)
+			time_diff=$((current_date - last_modified_time))
+			time_diff_hours=$((time_diff / 3600))
+			if [ $time_diff_hours -lt 24 ]; then
+			    echo "$file"
+			fi
+		    fi
+		done 
 		
 		while_condition="false"
 		menu=" "
@@ -95,7 +106,6 @@ do
 	else
 		echo "logical error"
 	fi
-#code below this loop
 	cd $location
 	echo $location
 	read -p "If you would like to exit this program, type 'Quit', else this program will execute again (press 'Enter'): " flag
@@ -103,7 +113,3 @@ done
 
 
 
-#need to find a way to make the code for the menu into a function so I can call it for subdirectories
-#need to make it return the file/directory picked
-#need to shift the user input statment so it occurs outside the function
-#why is file_printer not giving the right values
