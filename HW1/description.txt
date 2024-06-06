@@ -1,8 +1,20 @@
 Problem 1:
 
+First I set up a loop so that the program could repeat in case of a tie. My condition for the loop was a flag variable, where upon a winner being reached, would be set to false, thereby failing the condition and terminating the program. 
+
+For the computer choices, I used the random function and the modulo operator as discussed in class.
+
+Then I simply implemented the outcomes based on the possible player and computer values. 
 
 Problem 2:
 
+First I treated the case that the number of arguments was zero (no file name was given), and if there were, to terminate the program
+
+Next, I checked whether the argument was not a file or directory, the argument was a file, or whether the argument was a directory.
+
+If it was a file, I checked for read and execute permissions through the stat and cut command, which isolated the characters need. I chose to use the  
+
+If it was a directory
 
 Problem 3:
 
