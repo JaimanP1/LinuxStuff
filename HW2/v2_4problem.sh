@@ -14,15 +14,5 @@ cat "temp_output.txt"
 #filtering in form age, name
 sed -n 's/\([[:alpha:]]\{1,\} [[:alpha:]]\{1,\},\) \([0-9]\{4\}\).*/\2\1/p' "temp_output.txt" >> "temp2.txt"
 
-cat "temp2.txt" | while read line 
-do
-	#need a way to subtract off only the age portion
-	ans=$(( 2024 - line ))
-	echo $ans >> "temp3.txt"
-done
-
-sort -n "temp3.txt" > sorted_ages.txt  
-
-rm "temp2.txt"
 rm "temp_output.txt"
 rm "temp3.txt"
