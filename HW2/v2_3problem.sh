@@ -2,28 +2,31 @@
 
 read -p "Enter a directory: " path
 
-#function to extract email addresses
-extract() {
-	grep -E '[[:alnum:]]*@[a-zA-Z]\.([a-zA-Z]){3}' $1 >> $2
-}
 
-
-#function to recursively traverse directories
+# Function to recursively traverse directories
 recursive_traverse() {
-	for obj in "$1"/*
-        do
-                if [ -f "$obj" ]; then
-                        echo "$obj"
-			if [[ "$obj" == *.txt ]]; then
-				echo "$obj" is a text file
-				extract "$obj" $2
-			fi
-                else
-                        echo "traversing directory: " "$obj"
-			recursive_traverse "$obj"
-                fi
-        done
-
+    for obj in "$1"/*
+    do
+        if [ -f "$obj" ]; then
+           # echo "$obj"
+            if [[ "$obj" == *.txt ]]; then
+            #    echo "$obj is a text file"
+                grep -E -o '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}' "$obj" >> "$2"
+            fi
+        elif [ -d "$obj" ]; then
+           # echo "traversing directory: $obj"
+            recursive_traverse "$obj" "$2"
+        fi
+    done
 }
-touch "extracted_addresses.txt"
-recursive_traverse $path "extracted_addresses.txt"
+
+output_file="unique_emails.txt"
+temp_file="temp_emails.txt"
+touch "$temp_file"
+recursive_traverse "$path" "$temp_file"
+sort "$temp_file" | uniq > "$output_file"
+rm "$temp_file"
+
+echo "Unique email addresses have been saved to $output_file"
+
+
