@@ -1,7 +1,9 @@
 #!/bin/bash
 
 read -p "Enter a directory: " path
-
+if [ ! -d "$path" ]; then
+        echo "This is not a valid directory"
+fi
 
 # Function to recursively traverse directories
 recursive_traverse() {
