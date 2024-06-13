@@ -1,4 +1,2 @@
 	printf("Hello world\n");
 	printf("This is part of 288");
-	printf("Hello world\n");
-	printf("This is part of 288");

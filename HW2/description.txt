@@ -1,0 +1,35 @@
+Problem1:
+
+I first checked if an argument was provided.
+
+I then used regular expressions to isolate words with at least 3 of the letter 'a' and counted them and did the same for the next part of the problem as well.
+
+For the final part, as the advice suggested, I first checked for words with consecutive 'e' patterns of length two, then found all the last three characters, before sorting and counting them to find the most common.
+
+Problem2:
+
+I first checked whether an argument was given and whether all files the output would be added to existed. If they did not, I created them.
+
+I then found the total number of lines as well as the number of occurences for each of the strings given.
+
+I then used arithmetic expansion to find the percentages of occurences to total number of lines.
+
+Finally, I appended the occurences to the appropriate log files.
+
+Problem3:
+
+I first checked if the input directory existed.
+
+I then defined a recursive search function. If the object in the directory was a text file, a regular expression was applied to extract the email address. If the object was a subdirectory, the function was called again. 
+
+I then sorted and eliminated duplicate copies of the email addresses. 
+
+Problem4:
+
+I first read in a file then applied an appropriate regular expression to extract all lines with two word cities.
+
+I then isolated the fields which pertained to a person's age and name and formatted it such that sorted would be easy.
+
+I then calculated their age by extracting the appropriate field from the formatted data and then added the new data with their age and name to a new file.
+
+Finally, I sorted the file based on the age. 
