@@ -1,0 +1,10 @@
+Read textbook 
+
+- Take input
+	- Use scanf
+- How to interact with directories in C
+	- Use recursive traverse code from HW2
+- Open .txt files
+	- Use regex
+- Count lines
+
