@@ -1,4 +1,4 @@
-Read textbook 
+Read textbook, or at least find a better resource
 
 - Take input
 	- Use scanf
