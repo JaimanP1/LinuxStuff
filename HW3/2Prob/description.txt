@@ -1,10 +1,5 @@
-Read textbook, or at least find a better resource
+First I wrote a function to traverse directories recursively. I relied significantly on https://codeforwin.org/c-programming/c-program-to-list-all-files-in-a-directory-recursively and https://stackoverflow.com/questions/5309471/getting-file-extension-in-c to help me. The former helped me properly recursively traverse the directory while the latter helped me check the extension types.
 
-- Take input
-	- Use scanf
-- How to interact with directories in C
-	- Use recursive traverse code from HW2
-- Open .txt files
-	- Use regex
-- Count lines
+I then wrote a simple function to count the number of lines in a file using the built in functions to do so. 
 
+Finally, I called the traverse function in my main function.
