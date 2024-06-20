@@ -1,3 +1,12 @@
+Prob 1:
+I first checked the sizes of the matrices using the sizeof function and reading the first value of the array to determine the dimension. I then checked if it was over 100. 
+
+Finally, I checked whether both matrices were of the same size. 
+
+Unfortunately, I was unable to successfully complete the rest of this problem.
+
+
+Prob 2:
 First I wrote a function to traverse directories recursively. I relied significantly on https://codeforwin.org/c-programming/c-program-to-list-all-files-in-a-directory-recursively and https://stackoverflow.com/questions/5309471/getting-file-extension-in-c to help me. The former helped me properly recursively traverse the directory while the latter helped me check the extension types.
 
 I then wrote a simple function to count the number of lines in a file using the built in functions to do so. 
