@@ -9,7 +9,7 @@ void radix_sort(unsigned int A[], unsigned int n){
 		count0 = 0;
 		count1 = 0;
 		for(int i = 0; i < n; i++){
-			if(A[i] & mask == 0){
+			if((A[i] & mask) == 0){
 				bucket0[count0++] = A[i];
 			}
 			else{
@@ -27,15 +27,15 @@ void radix_sort(unsigned int A[], unsigned int n){
 int main(){
 	int A[] = {1, 5, 10, 8, 4, 0, 3, 2};
 	int n = sizeof(A) / sizeof(A[0]);
-	printf("before sorting: \n");
-	for(int i=0; i<n; i++){
-		printf("%d, ", A[i]);
-	}
-	printf("\n");
+	//printf("before sorting: \n");
+	//for(int i=0; i<n; i++){
+	//	printf("%d, ", A[i]);
+	//}
+	//printf("\n");
 	radix_sort(A, n);
-	printf("after sorting: \n");
+	//printf("after sorting: \n");
 	for(int i=0; i<n; i++){
-		printf("%d, ", A[i]);
+		printf("%d done \n ", A[i]);
 	}
-	printf("\n");
+	//printf("\n");
 }
