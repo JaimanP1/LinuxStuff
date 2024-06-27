@@ -26,23 +26,23 @@ void radix_sort(unsigned int A[], unsigned int n) {
 }
 
 int main() {
-    unsigned int n;
-    scanf("%u", &n);  // Read the number of elements
+    int n;
+    scanf("%u", &n); 
 
     unsigned int *A = (unsigned int *)malloc(n * sizeof(unsigned int));
     if (A == NULL) {
-        fprintf(stderr, "Memory allocation failed\n");
-        return 1;
+        printf("Something went wrong");
+        return 0;
     }
 
-    for (unsigned int i = 0; i < n; i++) {
-        scanf("%u", &A[i]);  // Read the elements
+    for (int i = 0; i < n; i++) {
+        scanf("%u", &A[i]);  
     }
 
     radix_sort(A, n);
 
-    for (unsigned int i = 0; i < n; i++) {
-        printf("%u\n", A[i]);  // Print the sorted elements
+    for (int i = 0; i < n; i++) {
+        printf("%u\n", A[i]); 
     }
 
     free(A);
