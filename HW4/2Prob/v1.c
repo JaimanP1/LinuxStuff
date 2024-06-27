@@ -44,16 +44,16 @@ void radix_sort(unsigned int A[], unsigned int n){
     }
 }
 int main() {
-    unsigned int n;
+    int n;
     scanf("%u", &n);  
 
     float *A = (float *)malloc(n * sizeof(float));
     if (A == NULL) {
-        fprintf(stderr, "Memory allocation failed\n");
+        printf("Something went wrong\n");
         return 1;
     }
 
-    for (unsigned int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
         scanf("%f", &A[i]); 
     }
 
@@ -61,7 +61,7 @@ int main() {
     unsigned int *p = (unsigned int *) A;
     radix_sort(p, n);
 
-    for (unsigned int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
         printf("%f\n", A[i]); 
     }
 

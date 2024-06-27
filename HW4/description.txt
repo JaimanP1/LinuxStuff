@@ -1,0 +1,15 @@
+For both problems, I used the code structure provided in class for radix sort
+
+Problem 1:
+I first initialized an array based on user input using malloc and scanf for the size. I then used a loop to append values to the array.
+
+I then called the radix sort algorithm as discussed in class. 
+
+Problem 2:
+I first initialized an array based on user input using malloc and scanf for the size. I then used a loop to append values to the array.
+
+I then type casted the array to an unsigned integer so that bitwise operations could be performed on it. I then passed this type casted array into the radix sort function.
+
+I modified my radix sort function so that the last signed bit would be treated separately. For this bit, I adjusted the code so that if the bit was a one, the value would be appended to the start of the array. Additionally, I appended from the last element in the one bucket as that represented the value with the largest absolute value, which would be the most negative once the signed bit was accounted for. 
+
+Finally, I printed the float type of the array even though I had passed in the unsigned type casted array, allowing me to essentially convert back to the original data type for the output.
