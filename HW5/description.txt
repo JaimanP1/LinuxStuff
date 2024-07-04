@@ -1,0 +1,11 @@
+Problem 1:
+First I retrieved the address of the argv array. I did this by type casting it as a double pointer to a character, since this is essentially how the argv can be treated.
+Next, I printed out the first element and well as the address of the pointer.
+Then, I iterated over the argv array and printed out the value of the pointers as well as their addresses.
+Finally, I printed out the contiguous block of memory associated for the array. I did this by first storing the value of the pointer as an unsigned long so I could perform arithmetic on the address since an int does not have a large enough size. I also found the size of the array. I then used the modulo operator to ensure I was starting from memory that was a mltiple of 8. I then iterated over the memory block, again using unsigned long to ensure that addresses could be manipulated.
+
+Problem 2:
+I used the slides a template for the first few operands. For the files, I simply checked whether there were any missing elements in argv which were not caught by opt, then printed those out assuming they were the files.
+
+Problem 3:
+I first iterated over all the evironment variables in the main function. Next, I called the bubble sort function using the structure provided in the class code. I truncated the string to only the name portion using the strtok method. I then adjusted the swap function so it could work for the double pointers being passed. 
