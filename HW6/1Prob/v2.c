@@ -6,9 +6,15 @@ struct node {
 	struct node *next;
 };
 
+struct reverse_node {
+	int value;
+	struct reverse_node *previous;
+};
+
 int main (int argc, char **argv){
 	
 	struct node *head = NULL, *tail = NULL, *new = NULL;
+	struct reverse_node *rhead = NULL, *rtail = NULL, *rnew = NULL;
 
 	printf("Enter a value: ");
 	int input;
@@ -43,7 +49,34 @@ int main (int argc, char **argv){
 	while (pnode->next != NULL){
 		
 		printf("\nindex: %d, value: %d \n", i, pnode->value);
+		
+		//reversing the list
+		if(rhead == NULL){
+			rhead = (struct reverse_node *)malloc(sizeof(struct reverse_node));
+			rhead->previous = NULL;
+			rhead->value = pnode->value;
+			rnew = (struct reverse_node *)malloc(sizeof(struct reverse_node));
+			rnew->previous = rhead;
+		}
+		
+		else{
+			rnew->value = pnode->value;
+			rtail = (struct reverse_node *)malloc(sizeof(struct reverse_node));
+			rtail->previous = rnew;
+			rnew = rtail;
+			rtail = NULL;
+		}
+		
 		pnode = pnode->next;
 		i++;
+	}
+
+	printf("\nReversing list: \n");
+	
+	struct reverse_node *rpnode = rnew->previous;
+	i--;
+	while(rpnode != NULL){
+		printf("\nindex: %d, value: %d \n", i--, rpnode->value);
+		rpnode = rpnode->previous;
 	}
 }
