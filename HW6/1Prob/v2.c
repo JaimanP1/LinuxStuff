@@ -12,9 +12,8 @@ int main (int argc, char **argv){
 
 	printf("Enter a value: ");
 	int input;
-	scanf("%d", &input);
 
-	while(input != EOF){
+	while( scanf("%d", &input) != EOF){
 		
 		if(head == NULL){
 			
@@ -31,18 +30,20 @@ int main (int argc, char **argv){
 			tail = (struct node *)malloc(sizeof(struct node));
 			new->next = tail;
 			tail = NULL;
-			new = *(new->next);
+			//new = (struct node *)*(new->next);
+			new = new->next;
 		}
 
 		printf("Enter a value: ");
-		scanf("%d", &input);
 	}
 
 	struct node *pnode;
 	pnode = head;
 	int i = 0;
-	while (pnode != NULL){
+	while (pnode->next != NULL){
 		
-		printf("index: %d, value: %d", i, pnode->value);
+		printf("\nindex: %d, value: %d \n", i, pnode->value);
+		pnode = pnode->next;
+		i++;
 	}
 }
