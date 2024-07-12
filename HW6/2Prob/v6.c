@@ -7,7 +7,7 @@ struct node {
 	
 };
 
-void swap( struct node *pnode, struct node *pnode2 ){
+struct node * swap( struct node *pnode, struct node *pnode2 ){
 	
 	//struct node **temp = &pnode2;
 	//pnode2 -> next -> next = *temp;
@@ -25,9 +25,15 @@ void swap( struct node *pnode, struct node *pnode2 ){
         //pnode2->next->next = temp;
 	
 
-	pnode -> next = pnode2 -> next;
-	pnode2 -> next = pnode -> next -> next;
-	pnode2 = pnode -> next;
+//	pnode -> next = pnode2 -> next;
+//	pnode2 -> next = pnode -> next -> next;
+//	pnode2 = pnode -> next;
+
+
+	struct node* tmp = pnode2 -> next;
+	pnode2 -> next = pnode;
+	pnode -> next = tmp;
+	return pnode2;
 }
 
 int main(int argc, char **argv){
@@ -71,26 +77,50 @@ int main(int argc, char **argv){
 	}
 
 	//bubble sort part
-	pnode = head;
-	struct node *pnode2;
+	struct node **p1;
+	for (int j = 0; j < i; j++ ){
 
-	while( pnode -> next -> next != NULL ){
-		pnode2 = head;
+		p1 = &head;
+		
+		for( int k = 0; k < i; k++ ){
 
-		while( pnode2 -> next -> next != NULL ){
+			struct node *node1 = *p1;
+			struct node *node2 = node1 -> next;
 			
-			if ( pnode -> next -> value > pnode2 -> next -> value ){
-			
-				swap( pnode, pnode2 );
-			}	
-			
-			pnode2 = pnode2 -> next;
+			if( node2 == NULL ){
+				break;
+			}
+
+			if( node1 -> value > node2 -> value ){
+
+				*p1 = swap( node1, node2 );
+			}
+
+			p1 = &(*p1) -> next;
 		}
-
-		pnode = pnode -> next;
 	}
 
-	//edge case for head node and tail nodes
+	//original
+//	pnode = head;
+//	struct node **pnode2;
+
+//	while( pnode -> next -> next != NULL ){
+//		pnode2 = head;
+
+//		while( pnode2 -> next -> next != NULL ){
+			
+//			if ( pnode -> next -> value > pnode2 -> next -> value ){
+			
+//				swap( pnode, pnode2 );
+//			}	
+			
+//			pnode2 = pnode2 -> next;
+//		}
+
+//		pnode = pnode -> next;
+//	}
+
+	//edge cases for head and tail?
 	
 	
 	//printing result
@@ -100,5 +130,7 @@ int main(int argc, char **argv){
 	while ( pnode -> next != NULL ){
 		
 		printf("index: %d, value: %d", i, pnode -> value);
+		pnode = pnode -> next;
+		i++;
 	}
 }
