@@ -1,0 +1,5 @@
+Problem 1:
+I first wrote my own linked list by adding nodes based on user input. I then repeated the the opposite logic to build the reverse linked list while iterating over the original.
+
+Problem 2:
+I built the linked list through the same method as problem 1. I then wrote a bubble sort portion that mirrored bubble sort for arrays. The difficult part was figuring out how to reassign the pointers which were traversing the list. Finally, I wrote a swap function that was also based on the corresponding function for arrays.

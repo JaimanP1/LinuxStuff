@@ -27,7 +27,6 @@ int main (int argc, char **argv){
 			new = (struct node *)malloc(sizeof(struct node));
 			head->next = new;
 			head->value = input;
-			//new->value = NULL;
 		}
 
 		else {
@@ -36,7 +35,6 @@ int main (int argc, char **argv){
 			tail = (struct node *)malloc(sizeof(struct node));
 			new->next = tail;
 			tail = NULL;
-			//new = (struct node *)*(new->next);
 			new = new->next;
 		}
 
@@ -64,7 +62,6 @@ int main (int argc, char **argv){
 			rtail = (struct reverse_node *)malloc(sizeof(struct reverse_node));
 			rtail->previous = rnew;
 			rnew = rtail;
-			rtail = NULL;
 		}
 		
 		pnode = pnode->next;
