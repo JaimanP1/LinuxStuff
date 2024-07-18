@@ -19,7 +19,7 @@ int goal_rows[NxN];
 int goal_columns[NxN];
 struct node *start,*goal;
 struct node *open = NULL, *closed = NULL;
-struct node *succ_nodes[4];
+struct node *succ_nodes[N];
 
 void print_a_node(struct node *pnode) {
 	int i,j;
@@ -83,11 +83,11 @@ struct node *initialize(char **argv){
 void merge_to_open() {
     //making array to store successor nodes then bubble sorting the array
 
-    int placeholder[4];
+    int placeholder[N];
     int i = 0;
 
     // Collecting the f values from the successor nodes
-    for (int j = 0; j < 4; j++) {
+    for (int j = 0; j < N; j++) {
         if (succ_nodes[j] != NULL) {
             placeholder[i] = succ_nodes[j]->f;
             i++;
@@ -95,6 +95,7 @@ void merge_to_open() {
     }
 
     // Sorting the placeholder array using bubble sort
+	// SHOULD I SWAP BASED ON F VALUES?
     for (int j = 0; j < i - 1; j++) {
         for (int k = 0; k < i - j - 1; k++) {
             if (placeholder[k] > placeholder[k + 1]) {
@@ -111,7 +112,7 @@ void merge_to_open() {
     struct node **new_open_tail = &new_open;
 
     for (int j = 0; j < i; j++) {
-        for (int k = 0; k < 4; k++) {
+        for (int k = 0; k < N; k++) {
             if (succ_nodes[k] != NULL && succ_nodes[k]->f == placeholder[j]) {
                 *new_open_tail = succ_nodes[k];
                 new_open_tail = &((*new_open_tail)->next);
@@ -138,7 +139,24 @@ void swap(int row1,int column1,int row2,int column2, struct node * pnode){
 /*update the f,g,h function values for a node */
 void update_fgh(int i) {
 	struct node *pnode = succ_nodes[i];
-	//...
+	if (pnode -> parent == NULL){
+		pnode -> g = 0;
+	}
+	else{
+		pnode -> g = pnode -> parent -> g + 1;
+	}
+	// CHECK TO MAKE SURE THAT ADDING ALL OF THE DIFFERENCES FOR EACH OF THE TILES IS CORRECT!!!
+	pnode->h = 0;
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            int tile = pnode->tiles[i][j];
+            if (tile != 0) {
+                pnode->h += abs(i - goal_rows[tile]) + abs(j - goal_columns[tile]);
+            }
+        }
+    }
+	
+	pnode -> f = pnode -> g + pnode -> h;
 }
 
 /* 0 goes down by a row */
@@ -169,9 +187,49 @@ void move_left(struct node * pnode){
  * array succ_nodes.
  */
 void expand(struct node *selected) {
-	...
-	succ_nodes[..] = ...;
-	...
+    short old_zero_row = selected -> zero_row;
+    short old_zero_column = selected -> zero_column;
+    int new_zero_row, new_zero_column;
+
+    // Initialize succ_nodes to NULL
+    for (int i = 0; i < N; i++) {
+        succ_nodes[i] = NULL;
+    }
+
+    // Possible moves: up, down, left, right
+    const int row_options[] = {-1, 1, 0, 0};
+    const int col_options[] = {0, 0, -1, 1};
+
+    for (int i = 0; i < N; i++) {
+        new_zero_row = old_zero_row + row_options[i];
+        new_zero_column = old_zero_column + col_options[i];
+
+        // Check if the move is within bounds
+        if (new_zero_row >= 0 && new_zero_row < N && new_zero_column >= 0 && new_zero_column < N) {
+            struct node *new_node = (struct node *)malloc(sizeof(struct node));
+            if (new_node == NULL) {
+                printf("Memory allocation failed\n");
+                //exit(EXIT_FAILURE);
+            }
+
+            // Copy tiles and swap the zero tile
+			for(int j = 0; j < N; j++){
+				for(int k = 0; k < N; k++){
+					new_node -> tiles[j][k] = selected -> tiles[j][k];
+				}
+			}
+			// CHECK THIS REASSIGNMENT!!!
+            new_node -> tiles[old_zero_row][old_zero_column] = new_node -> tiles[new_zero_row][new_zero_column];
+            new_node -> tiles[new_zero_row][new_zero_column] = 0;
+            new_node -> zero_row = new_zero_row;
+            new_node -> zero_column = new_zero_column;
+
+            // Set parent and initialize f, g, h values
+            new_node -> parent = selected;
+			succ_nodes[i] = new_node;
+            update_fgh(i);
+        }
+    }
 }
 
 int nodes_same(struct node *a,struct node *b) {
@@ -192,7 +250,7 @@ int nodes_same(struct node *a,struct node *b) {
  */ 
 void filter(int i, struct node *pnode_list){ 
 	struct node *pnode = succ_nodes[i];
-	...
+	//...
 }
 
 int main(int argc,char **argv) {
@@ -225,14 +283,14 @@ int main(int argc,char **argv) {
 			} while(copen!=NULL);
 			printf("Path (lengh=%d):\n", pathlen); 
 			copen=solution_path;
-			... /* print out the nodes on the list */
+			//... /* print out the nodes on the list */
 			break;
 		}
 		expand(copen);       /* Find new successors */
 
 		/* DEBUG: print the layouts/nodes organized by succ_nodes[] */
 
-		for(i=0;i<4;i++){
+		for(i=0;i<N;i++){
 			filter(i,open);
 			filter(i,closed);
 			update_fgh(i);
