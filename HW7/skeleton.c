@@ -297,6 +297,10 @@ int main(int argc,char **argv) {
 			printf("Path (lengh=%d):\n", pathlen); 
 			copen=solution_path;
 			//... /* print out the nodes on the list */
+			struct node *iterator = copen;
+			while (iterator != NULL){
+				print_a_node(iterator);
+			}
 			break;
 		}
 		expand(copen);       /* Find new successors */
