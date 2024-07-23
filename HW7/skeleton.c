@@ -250,18 +250,18 @@ int nodes_same(struct node *a,struct node *b) {
  */ 
 void filter(int i, struct node *pnode_list){ 
 	struct node *pnode = succ_nodes[i];
-	struct node *iterator = pnode_list;
+	struct node **iterator = pnode_list;
 	if (pnode == NULL) {
         return;
     }
-	while( iterator != NULL ){
+	while( *iterator != NULL ){
 		int val = nodes_same(iterator, pnode);
 		if ( val == 1 ){
 			succ_nodes[i] = NULL;
 			return;
 		}
 		else{
-			iterator = pnode_list -> next;
+			*iterator = pnode_list -> next;
 		}
 	}
 }
@@ -308,7 +308,7 @@ int main(int argc,char **argv) {
 		/* DEBUG: print the layouts/nodes organized by succ_nodes[] */
 
 		for(i=0;i<N;i++){
-			filter(i,open);
+			filter(i,copen);
 			filter(i,closed);
 			update_fgh(i);
 		}

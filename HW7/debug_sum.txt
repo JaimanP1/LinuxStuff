@@ -1,0 +1,10 @@
+Problem in filter function, should open ever be null
+	Set a breakpoint
+	Seems that iterator is null, suggesting open is null
+		Turns out that it is
+		Only gets reassigned in the merge_to_open method
+			Set breakpoint
+			Track open value
+			Fix line
+Segmentation fault at line 142
+
