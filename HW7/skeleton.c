@@ -83,33 +83,31 @@ struct node *initialize(char **argv){
 void merge_to_open() {
     //making array to store successor nodes then bubble sorting the array
 
-    int placeholder[N];
-    int i = 0;
-
-    // Collecting the f values from the successor nodes
-    for (int j = 0; j < N; j++) {
-        if (succ_nodes[j] != NULL) {
-            placeholder[i] = succ_nodes[j]->f;
-            i++;
+    // Collect non-NULL nodes from succ_nodes
+    for (int i = 0; i < N; i++) {
+        if (succ_nodes[i] != NULL) {
+            temp_list[count] = succ_nodes[i];
+            count++;
         }
     }
 
-    // Sorting the placeholder array using bubble sort
-	// SHOULD I SWAP BASED ON F VALUES?
-    for (int j = 0; j < i - 1; j++) {
-        for (int k = 0; k < i - j - 1; k++) {
-            if (placeholder[k] > placeholder[k + 1]) {
-                int temp = placeholder[k];
-                placeholder[k] = placeholder[k + 1];
-                placeholder[k + 1] = temp;
+    // Bubble sort based on f values
+    for (int i = 0; i < count - 1; i++) {
+        for (int j = 0; j < count - i - 1; j++) {
+            if (temp_list[j]->f < temp_list[j + 1]->f) {
+                struct node *temp = temp_list[j];
+                temp_list[j] = temp_list[j + 1];
+                temp_list[j + 1] = temp;
             }
         }
     }
 
-    // Creating a new open list from the sorted f values
-	// REVIEW THIS PART!!!
-    struct node *new_open = NULL;
-    struct node **new_open_tail = &new_open;
+    // Merge sorted nodes into the open list 
+    for (int i = 0; i < count; i++) {
+        temp_list[i]->next = open;
+        open = temp_list[i];
+    }
+}
 
     for (int j = 0; j < i; j++) {
         for (int k = 0; k < N; k++) {
@@ -139,6 +137,9 @@ void swap(int row1,int column1,int row2,int column2, struct node * pnode){
 /*update the f,g,h function values for a node */
 void update_fgh(int i) {
 	struct node *pnode = succ_nodes[i];
+    if (pnode == NULL){
+        return;
+    }
 	if (pnode -> parent == NULL){
 		pnode -> g = 0;
 	}
@@ -147,16 +148,16 @@ void update_fgh(int i) {
 	}
 	// CHECK TO MAKE SURE THAT ADDING ALL OF THE DIFFERENCES FOR EACH OF THE TILES IS CORRECT!!!
 	pnode->h = 0;
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            int tile = pnode->tiles[i][j];
+    for (int row = 0; row < N; row++) {
+        for (int col = 0; col < N; col++) {
+            int tile = pnode->tiles[row][col];
             if (tile != 0) {
-                pnode->h += abs(i - goal_rows[tile]) + abs(j - goal_columns[tile]);
+                pnode->h += abs(row - goal_rows[tile]) + abs(col - goal_columns[tile]);
             }
         }
     }
 	
-	pnode -> f = pnode -> g + pnode -> h;
+	succ_nodes[i] -> f = pnode -> g + pnode -> h;
 }
 
 /* 0 goes down by a row */
@@ -287,23 +288,22 @@ int main(int argc,char **argv) {
 		 * convenient as using gdb.
 		 * */
 
-		if(nodes_same(copen,goal)){ /* goal is found */
-			do{ /* trace back and add the nodes on the path to a list */
-				copen->next=solution_path;
-				solution_path=copen;
-				copen=copen->parent;
-				pathlen++;
-			} while(copen!=NULL);
-			printf("Path (lengh=%d):\n", pathlen); 
-			copen=solution_path;
-			//... /* print out the nodes on the list */
-			struct node *iterator = copen;
-			while (iterator != NULL){
-				print_a_node(iterator);
-			}
-			break;
-		}
-		expand(copen);       /* Find new successors */
+        if (nodes_same(copen, goal)) { /* goal is found */
+            do { /* trace back and add the nodes on the path to a list */
+                copen->next = solution_path;
+                solution_path = copen;
+                copen = copen->parent;
+                pathlen++;
+            } while (copen != NULL);
+            struct node *iterator = solution_path;
+            while (iterator != NULL) {
+                print_a_node(iterator);
+                iterator = iterator->next;
+            }
+            printf("Path (length=%d):\n", pathlen);
+            break;
+        }
+        expand(copen); /* Find new successors */
 
 		/* DEBUG: print the layouts/nodes organized by succ_nodes[] */
 
@@ -313,20 +313,16 @@ int main(int argc,char **argv) {
 			update_fgh(i);
 		}
 
-		/* DEBUG: print the layouts/modes remaining in succ_nodes[] */
-
-		merge_to_open(); /* New open list */
-
-		/* DEBUG: print the layouts/nodes on the open list */
-
-		copen->next=closed;
-		closed=copen;		/* New closed */
-		/* print out something so that you know your 
-		 * program is still making progress 
-		 */
-		iter++;
-		if(iter %1000 == 0)
-			printf("iter %d\n", iter);
-	}
-	return 0;
-} /* end of main */
+        copen->next = closed;
+        closed = copen; /* New closed */
+        iter++;
+        if (iter % 1000 == 0){
+            printf("iter %d\n", iter);
+        }
+        if (iter >= 10000){
+            printf("Could not find a solution after 10000 iterations, aborting\n");
+            return 0;
+        }
+    }
+    return 0;
+}
