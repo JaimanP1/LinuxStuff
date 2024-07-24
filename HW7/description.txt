@@ -1,0 +1,5 @@
+Most of the program was pretty straightforward to write, except for the merge_to_open method. I spent significant time on this portion once I identified it as the cause of error.
+
+I initially wrote the program and used gdb to trace the execution and noticed that my open list always seemed to be moving away from the correct solution. After checking each of the methods multiple times and eliminating all possible bugs, I found the error to be in the assignment of the list being made in the merge method to the open list.
+
+The debugging for the aforementioned process took the bulk of my time for this homework, whereas filling in the code was nearly trivial for all the other methods. 

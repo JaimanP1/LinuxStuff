@@ -1,0 +1,27 @@
+Problem in filter function, should open ever be null
+	Set a breakpoint
+	Seems that iterator is null, suggesting open is null
+		Turns out that it is, line 281
+		Only gets reassigned in the merge_to_open method
+			Set breakpoint
+			Track open value
+			Fix line
+	Iterator keeps going into infinite loop if copen is used instead of open in main method filter call
+Segmentation fault at line 142
+
+-----------------
+On first pass, everything looks good in main
+
+try tracking for iter > 0
+
+seems that the program is moving away from the right solution 
+suggests update or merge_to_open function is wrong 
+
+update seems correct, gives reasonable values for configurations
+means merge_to_open is most likely wrong
+
+initialization and bubble sort portion as run in gdb seem correct
+which means assignment to open is incorrect
+
+turns out, am assigning to open in backwards order; highest f valued nodes are going first
+switched comparison operation in bubble sort part so temp_list is backwards; assigns to open correctly now
