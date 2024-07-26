@@ -3,3 +3,5 @@ First need to write a simple program that is able to read the binary data in fil
 Then I need to use count sort and write it to a binary file. (done)
 
 Finally I need to parallelize it. 
+
+Ascending order?
