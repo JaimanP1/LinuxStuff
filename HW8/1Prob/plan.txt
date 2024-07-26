@@ -1,5 +1,5 @@
 First need to write a simple program that is able to read the binary data in file5k values. (done) 
 
-Then I need to use count sort to do it efficiently.
+Then I need to use count sort and write it to a binary file. (done)
 
 Finally I need to parallelize it. 
