@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 	srand48((unsigned)time(NULL));  
 	for (i = 0; i <numints; ++i) {
 		ivalue = lrand48()%1000;
-		printf("%d\n", ivalue);
+		//printf("%d\n", ivalue);
 		map[i] = ivalue;
 		total += ivalue;
 	}

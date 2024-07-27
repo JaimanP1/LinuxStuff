@@ -7,7 +7,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/mman.h>
-//#include <mpi.h>
+#include <mpi.h>
 #include <pthread.h>
 
 void file_reader(int *fd, int *numints, int *filesize, unsigned int **map, char **argv){
