@@ -12,3 +12,12 @@ They then need to count the frequency for each of the indices of the counts arra
 They should finally return their portion of the counts array back to the main process.
 
 What variables need to be broadcasted?
+
+----------------
+fix user input for file part. use scanf not argv
+
+edge cases when gendata is run for non multiples of 10???
+seems to not be handling last element of sorted array correctly
+
+also when gendata is run for odd numbers, especially 1 and 3
+check initialization of variables

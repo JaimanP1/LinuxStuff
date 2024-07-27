@@ -29,7 +29,7 @@ void file_reader(int *fd, int *numints, int *filesize, unsigned int **map, char 
 }
 
 void file_writer(int *fd, int *numints, int *filesize, unsigned int **map, char **argv) {
-    *fd = open(argv[2], O_RDWR | O_CREAT | O_TRUNC, (mode_t)0600);
+    *fd = open(argv[1], O_RDWR | O_CREAT | O_TRUNC, (mode_t)0600);
     if (*fd == -1) {
         perror("Error opening file for writing");
         exit(EXIT_FAILURE);
