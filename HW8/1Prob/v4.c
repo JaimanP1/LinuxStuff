@@ -7,7 +7,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/mman.h>
-//#include <mpi.h>
+#include <mpi.h>
 #include <pthread.h>
 
 void file_reader(int *fd, int *numints, int *filesize, unsigned int **map, char **argv){
@@ -65,6 +65,12 @@ int main (int argc, char **argv){
     unsigned int *map;
     unsigned long long int total = 0, sum = 0;
 
+    //mpi part
+    int rank, size;
+    MPI_Init(&argc, &argv);
+	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+	MPI_Comm_size(MPI_COMM_WORLD, &size);	
+
     file_reader(&fd, &numints, &filesize, &map, argv);
 
     //count sort portion
@@ -89,6 +95,9 @@ int main (int argc, char **argv){
 
     munmap(map, filesize);
     close(fd);
+
+    printf("I am a %d of %d\n", rank++, size);
+	MPI_Finalize();
 
     //writing binary values to another file for checkdata
     file_writer(&fd, &numints, &filesize, &map, argv);
