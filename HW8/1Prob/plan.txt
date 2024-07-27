@@ -5,3 +5,10 @@ Then I need to use count sort and write it to a binary file. (done)
 Finally I need to parallelize it. 
 
 Ascending order?
+
+MPI part:
+Each process needs the entire original array and a chunk of the counts array.
+They then need to count the frequency for each of the indices of the counts array they have received.
+They should finally return their portion of the counts array back to the main process.
+
+What variables need to be broadcasted?
