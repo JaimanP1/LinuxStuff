@@ -16,8 +16,8 @@ What variables need to be broadcasted?
 ----------------
 fix user input for file part. use scanf not argv
 
-edge cases when gendata is run for non multiples of 10???
+edge cases when gendata is run for non powers of 10???
 seems to not be handling last element of sorted array correctly
 
 also when gendata is run for odd numbers, especially 1 and 3
-check initialization of variables
+check initialization of variables and integer division for mpi methods. if not multiple of 4, then issue?

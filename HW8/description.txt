@@ -1,0 +1,9 @@
+Prob1:
+For this problem, I first ensured that I understood how the mapping of the binary values worked. 
+Then I made a serial count sort algorithm following the example in class. 
+Finally I parallelized it. I used the MPI Reduce function in order to simplify the addition of the individual frequency arrays. 
+
+Prob2:
+I initially set up the problem to serially compute pi.
+Then I added in basic pthread functionality to separate processes.
+Finally I added a partial sum variable that could be computed for each process then summed it for the final value of pi
