@@ -196,24 +196,28 @@ void expand(struct node *selected) {
 		copy(up,selected);
 		move_up(up);
 		succ_nodes[0] = up;
+		up->parent = selected;
 	}
 	if(selected -> zero_row != 3){
 		struct node *down = (struct node *)malloc(sizeof(struct node));
 		copy(down,selected);
 		move_down(down);
 		succ_nodes[1] = down;
+		down->parent = selected;
 	}
 	if(selected -> zero_column != 0){
 		struct node *left = (struct node *)malloc(sizeof(struct node));
 		copy(left,selected);
 		move_left(left);
 		succ_nodes[2] = left;
+		left->parent = selected;
 	}
 	if(selected -> zero_column != 3){
 		struct node *right = (struct node *)malloc(sizeof(struct node));
 		copy(right,selected);
 		move_right(right);
 		succ_nodes[3] = right;
+		right->parent = selected;
 	}
 }
 
@@ -277,11 +281,10 @@ int main(int argc,char **argv) {
 				pathlen++;
 			} while(copen!=NULL);
 			printf("Path (lengh=%d):\n", pathlen); 
-			copen=solution_path;
 			/* print out the nodes on the list */
-			while(copen != NULL){
-				print_a_node(copen);
-				copen = copen ->parent;
+			while(solution_path != NULL){
+				print_a_node(solution_path);
+				solution_path = solution_path -> next;
 			}
 			break;
 		}
