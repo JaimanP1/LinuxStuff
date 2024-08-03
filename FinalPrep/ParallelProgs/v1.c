@@ -50,6 +50,7 @@ int main(int argc, char **argv){
         for(int i = 0; i < N; i++){
             printf("%d ", sorted_array[i]);
         }
+        printf("\n");
     }
 
     free(split_array);
