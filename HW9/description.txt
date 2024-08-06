@@ -1,0 +1,1 @@
+I was only able to complete the webscraping part and not the apache server portion. This is because my php file could not access the MongoClient, a bug I was unable to resolve in time. For the webscraping portion, I followed the general outline as given in the examples from class. 
